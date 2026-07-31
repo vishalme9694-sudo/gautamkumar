@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>India's Premium Stock Market Learning Hub</title>
+  <meta name="description" content="Daily Market Analysis, Nifty/BankNifty Setups & Price Action Education for Indian Traders.">
+  
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg: #060911;
+      --card-bg: #0e1526;
+      --border: rgba(255, 255, 255, 0.08);
+      --tg-blue: #0088cc;
+      --gold: #f59e0b;
+      --green: #10b981;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Ticker Banner */
+    .top-bar {
+      background: #0b1120;
+      text-align: center;
+      padding: 9px 12px;
+      font-size: 12px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+    }
+
+    .top-bar b { color: var(--gold); letter-spacing: 0.5px; }
+
+    /* Layout Container */
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 16px 14px;
+    }
+
+    /* Main Card */
+    .profile-card {
+      text-align: center;
+      background: var(--card-bg);
+      padding: 22px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .img-box {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      background: #1e293b;
+      padding: 2px;
+    }
+
+    .img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.12);
+      color: var(--gold);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    h1 { font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.3px; }
+    .sub { color: var(--gold); font-size: 13px; font-weight: 600; margin-top: 2px; }
+    .desc { color: var(--muted); font-size: 12px; margin-top: 10px; line-height: 1.5; }
+
+    /* Stats Grid */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .box {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 12px 4px;
+      border-radius: 14px;
+      text-align: center;
+    }
+
+    .box h2 { color: var(--gold); font-size: 18px; font-weight: 800; }
+    .box p { font-size: 10px; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+    /* Ultra-Fast Telegram CTA */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #0088cc 0%, #24a1de 100%);
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 15px;
+      box-shadow: 0 8px 24px rgba(0, 136, 204, 0.3);
+      margin: 16px 0;
+      touch-action: manipulation;
+      letter-spacing: 0.3px;
+    }
+
+    .btn:active { transform: scale(0.98); }
+
+    /* Key Value Highlights */
+    .points { display: flex; flex-direction: column; gap: 8px; }
+
+    .point {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: rgba(0, 136, 204, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon svg { width: 16px; height: 16px; fill: #24a1de; }
+
+    .point-text { display: flex; flex-direction: column; }
+    .point-text strong { font-size: 12px; color: #ffffff; }
+    .point-text span { font-size: 11px; color: var(--muted); }
+
+    /* Footer & Legal */
+    .legal {
+      margin-top: 24px;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .tabs { display: flex; justify-content: center; gap: 16px; margin-bottom: 10px; }
+
+    .tab {
+      font-size: 11px;
+      color: var(--muted);
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-weight: 600;
+      padding-bottom: 2px;
+    }
+
+    .tab.active { color: var(--gold); border-bottom: 2px solid var(--gold); }
+    .info { display: none; background: #0b1120; padding: 10px; border-radius: 8px; line-height: 1.5; }
+    .info.active { display: block; }
+  </style>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1304198414881302');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1304198414881302&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="top-bar">
+    <div class="live-dot"></div>
+    <b>ALL-INDIA COMMUNITY:</b> Daily Market Setups & Analytics
+  </div>
+
+  <div class="container">
+    <!-- Profile Section -->
+    <div class="profile-card">
+      <div class="img-box">
+        <img src="gtm.jpg" alt="Stock Market Analyst" width="88" height="88" loading="eager" fetchpriority="high">
+      </div>
+      <span class="badge">Verified Market Analyst</span>
+      <h1>GAUTAM KUMAR JHA </h1>
+      <p class="sub">Market Strategist & Financial Educator</p>
+      <p class="desc">Master stock market price action strategies. Join India's fast-growing learning community for daily market insights and institutional setups.</p>
+    </div>
+
+    <!-- Metrics -->
+    <div class="stats">
+      <div class="box"><h2>7+</h2><p>Years Exp.</p></div>
+      <div class="box"><h2>15K+</h2><p>Traders</p></div>
+      <div class="box"><h2>Daily</h2><p>Live Analysis</p></div>
+    </div>
+
+    <!-- Official Telegram Button -->
+    <a href="https://t.me/+8j6b4Ox9-uo3ODdl" class="btn" id="ctaBtn">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+      JOIN FREE TELEGRAM CHANNEL
+    </a>
+
+    <!-- Key Benefits -->
+    <div class="points">
+      <div class="point">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 9.2h3V19H5zM10.6 5h2.8v14h-2.8zM16.2 13H19v6h-2.8z"/></svg></div>
+        <div class="point-text">
+          <strong>Daily Nifty & BankNifty Setup</strong>
+          <span>Key support, resistance & key levels</span>
+        </div>
+      </div>
+
+      <div class="point">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/></svg></div>
+        <div class="point-text">
+          <strong>Pre-Market Trends & News</strong>
+          <span>Stay ahead with institutional market insights</span>
+        </div>
+      </div>
+
+      <div class="point">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM3.97 12L12 16.39 20.03 12 12 7.61 3.97 12zM12 18a8.95 8.95 0 00-6.16 2.45l1.41 1.41C8.61 20.5 10.24 20 12 20s3.39.5 4.75 1.86l1.41-1.41A8.95 8.95 0 0012 18z"/></svg></div>
+        <div class="point-text">
+          <strong>Educational Resources</strong>
+          <span>Master price action, patterns & risk control</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meta-Safe Disclaimer Tabs -->
+    <div class="legal">
+      <div class="tabs">
+        <button class="tab active" onclick="showTab('p', this)">Privacy Policy</button>
+        <button class="tab" onclick="showTab('d', this)">Disclaimer</button>
+        <button class="tab" onclick="showTab('t', this)">Terms</button>
+      </div>
+
+      <div class="info active" id="p">Meta Pixel Analytics enabled. We respect privacy and do not collect personal financial data.</div>
+      <div class="info" id="d"><b>DISCLAIMER:</b> We are NOT SEBI registered. All updates are strictly for <strong>educational purposes only</strong>. Trading involves financial risk. No buy/sell tips or profit promises provided.</div>
+      <div class="info" id="t">18+ Age required. Educational content and setups only.</div>
+    </div>
+  </div>
+
+  <script>
+    function showTab(id, btn) {
+      document.querySelectorAll('.info').forEach(e => e.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(e => e.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    document.getElementById('ctaBtn').addEventListener('click', function() {
+      if (typeof fbq === 'function') fbq('track', 'Subscribe');
+    });
+  </script>
+</body>
+</html>>
